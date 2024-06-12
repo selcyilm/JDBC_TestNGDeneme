@@ -1,11 +1,12 @@
 package tests;
 
+import manage.ConnectionManage;
 import org.testng.annotations.Test;
 import utilities.ConfigReader;
 
 import java.sql.*;
 
-public class test01 {
+public class DenemeSelcukk {
 
 	public static final String URL = ConfigReader.getProperty("URL");
 	public static final String USERNAME = ConfigReader.getProperty("USERNAME");
@@ -61,8 +62,21 @@ public class test01 {
 		//ve bu değişiklerin yapıldığını test etmek istiyorsak
 		//(ROW AFFECTED- etkilenen satır) executeUpdate'yi kullanırız
 		//ancak bu bize sadece etkilenen satırların int olarak değerini döndürür.
+	}
 
+	@Test
+	public void updateSelcuk() throws SQLException {
+		//1. adım
 
+		Connection connection = DriverManager.getConnection(ConnectionManage.URL,
+															ConnectionManage.USERNAME,
+															ConnectionManage.PASSWORD);
 
+		//2. adım
+		String updateSql = "UPDATE subscribers SET email = 'tosun@gmail.com' WHERE id % 2 = 0;";
+
+		Statement statement = connection.createStatement();
+
+		System.out.println(statement.executeUpdate(updateSql));
 	}
 }
