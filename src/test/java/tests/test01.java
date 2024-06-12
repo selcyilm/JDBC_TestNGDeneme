@@ -62,5 +62,7 @@ public class test01 {
 		//(ROW AFFECTED- etkilenen satır) executeUpdate'yi kullanırız
 		//ancak bu bize sadece etkilenen satırların int olarak değerini döndürür.
 
+
+
 	}
 }
