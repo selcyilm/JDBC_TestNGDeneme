@@ -31,6 +31,25 @@ public class DenemeEsra {
 
     }
 
+    @Test
+    public void updateEsra() throws SQLException {
+
+        Connection connection = DriverManager.getConnection(ConnectionManage.URL, ConnectionManage.USERNAME,ConnectionManage.PASSWORD);
+
+        String prtQuery = "insert into languages (name,is_default) values (?,?)";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(prtQuery);
+        preparedStatement.setString(1,"türkisch");
+        preparedStatement.setInt(2,2);
+
+        System.out.println(preparedStatement.executeUpdate());
+
+
+    }
+
+
+
+
 
 
 }
