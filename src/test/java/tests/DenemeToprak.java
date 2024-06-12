@@ -8,7 +8,7 @@ import java.sql.*;
 public class DenemeToprak {
 
     @Test
-    public void topraktest() throws SQLException {
+    public void toprakstatement() throws SQLException {
 
         Connection connection = DriverManager.getConnection(ConnectionManage.URL,ConnectionManage.USERNAME,ConnectionManage.PASSWORD);
 
