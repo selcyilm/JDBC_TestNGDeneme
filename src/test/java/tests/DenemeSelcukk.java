@@ -1,6 +1,7 @@
 package tests;
 
 import manage.ConnectionManage;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import utilities.ConfigReader;
 
@@ -78,5 +79,35 @@ public class DenemeSelcukk {
 		Statement statement = connection.createStatement();
 
 		System.out.println(statement.executeUpdate(updateSql));
+	}
+
+	@Test
+	public void deleteSelcuk() throws SQLException {
+		//connection
+		Connection connection = DriverManager.getConnection(ConnectionManage.URL,
+				ConnectionManage.USERNAME,
+				ConnectionManage.PASSWORD);
+
+		//statement + sql query
+		int idToDelete = 15;
+		String queryDelete = "delete from loans where amount = ? and id = ?;";
+		PreparedStatement statement = connection.prepareStatement(queryDelete);
+
+		statement.setInt(1, 2000);
+		statement.setInt(2, idToDelete);
+
+		Assert.assertEquals(statement.executeUpdate(), 1);
+
+
+		String querySearch = "select * from loans where id = ?;";
+		PreparedStatement statement1 = connection.prepareStatement(querySearch);
+
+		statement1.setInt(1, idToDelete);
+
+		ResultSet resultSet = statement1.executeQuery();
+
+		Assert.assertFalse(resultSet.next());
+
+		connection.close();
 	}
 }
