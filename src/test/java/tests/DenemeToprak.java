@@ -1,6 +1,7 @@
 package tests;
 
 import manage.ConnectionManage;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.sql.*;
@@ -46,6 +47,41 @@ public class DenemeToprak {
 
 
     }
+
+    @Test
+    public void toprakdelete() throws SQLException {
+
+        Connection connection = DriverManager.getConnection(ConnectionManage.URL,ConnectionManage.USERNAME,ConnectionManage.PASSWORD);
+
+        int idDelete=56;
+
+        String queryDelete = "delete from gateways where id = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(queryDelete);
+
+        preparedStatement.setInt(1,idDelete);
+
+        System.out.println(preparedStatement.executeUpdate());
+
+
+        String queryControl = "select * from gateways where id = ?";
+
+        PreparedStatement preparedStatement1 = connection.prepareStatement(queryControl);
+
+        preparedStatement1.setInt(1,idDelete);
+
+        ResultSet resultSet = preparedStatement1.executeQuery();
+
+        Assert.assertFalse(resultSet.next());
+
+        connection.close();
+
+
+    }
+
+
+
+
 
 
 }
